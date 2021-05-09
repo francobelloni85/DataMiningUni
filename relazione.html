@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>Data mining progetto</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Recommendation system</h1>
+            <p>In questo progetto vogliamo raggruppare gli utenti del sito esercizinglese.com in base alla risposte che hanno dato nei vari esercizi.</p>
+            <p>Una volta che gli utenti sono stati raggruppati possiamo provare a suggerire esercizi alla loro portata</p>
+
+            <br><br>
+            <h2>Il dataset</h2>
+            <p>Il dataset è una tabella che contiene circa 2.700.000 di elementi.</p>
+            <p>è così composto:</p>
+            <img src="images/1.png">
+
+            <br><br>
+
+            <p>E' presente l'url che è stato richiesto, l'indirizzo ip e l'id dell'utente nel sito. Inotre sono salvate altre informazioni che
+                potrebbero servire in successive analisi come ad esempio la dimensione dello schermo e se è presente un adblock.</p>
+            <br>
+            <p>Le informazioni su cui concentriamo la nostra attenzione per questo progetto sono però le risposte che l'utente ha dato.</p>
+            <p>Il dataset, prendendo solamente le risposte degli esercizi degli utenti che si sono iscritti, si riduce da 2.700.000 a 30.372</p>
+            <img src="images/2.png">
+
+            <br><br><br>
+
+            <h2>Confronto fra risposte</h2>
+            <p>La prima operazione da fare è quella di poter confrontare le risposte che gli utenti hanno dato tra di loro</p>
+            <p>Le risposte possono essere a domande a crocette oppure a domande aperte.</p>
+            <p>Per confrontare le risposte aperte possiamo utilizzare diverse tecniche.</p>
+            <p>Inizialmente si prendono tutte le risposte di un dato esercizio.</p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+-->
+</body>
+</html>

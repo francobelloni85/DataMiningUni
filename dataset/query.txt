@@ -1,0 +1,32 @@
+# 1 - Da ese_analytics a ese_analytics_exercise
+create table ese_analytics_exercise SELECT * FROM ese_analytics where
+((url like "%https://www.esercizinglese.com/lezioni-inglesi/esercizi%") or
+(url like "%https://www.esercizinglese.com/traduzioni/brani-facili/esercizi%") or
+(url like "%https://www.esercizinglese.com/traduzioni/pet/esercizi%") or
+(url like "%https://www.esercizinglese.com/traduzioni/testi-in-inglese/esercizi/%") or
+(url like "%https://www.esercizinglese.com/audio/libri/esercizi/%") or
+(url like "%https://www.esercizinglese.com/esercizi-facili/esercizi/%")) and
+(length(exercise_input) > 1 ) and
+(userID != 0)
+
+# 1.1 converto tutto in lower case
+update ese_analytics_exercise set exercise_input = lower(exercise_input) where count>= 0
+
+# 2 - Prende gli indirizzi di tutti gli esercizi
+SELECT count(url) as count, url FROM ese_analytics_exercise group by url order by count desc;
+
+# 3 - Prende tutte le risposte per un determinato esercizio
+SELECT * FROM sql1238724_5.ese_analytics_exercise where url = 'https://www.esercizinglese.com/lezioni-inglesi/esercizi/1/1/l-infinito'
+
+# 4 - Creo la tabella feedback
+CREATE TABLE `ese_exercise_feedback` (
+  `exercise_type` varchar(20) NOT NULL,
+  `exercise_id` int NOT NULL,
+  `question_number` int NOT NULL DEFAULT '1',
+  `answer_number` int NOT NULL,
+  `answer` tinytext NOT NULL,
+  `percentage` int NOT NULL,
+  `correction` tinytext,
+  `url` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`exercise_type`,`exercise_id`,`answer_number`,`question_number`)
+) ENGINE=InnoDB;
