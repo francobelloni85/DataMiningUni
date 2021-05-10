@@ -1,13 +1,14 @@
-import dataclasses
+from dataclasses import dataclass
 
 from models.enums import ExerciseType
 
 
-@dataclasses
+@dataclass
 class ExerciseFeedbackData:
     exercise_type: ExerciseType
     exercise_id: int
     question_number: int
-    answer: int
+    answer_number: int
+    answer: str
     percentage: int
     correction: str

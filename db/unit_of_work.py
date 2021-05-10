@@ -1,9 +1,10 @@
-from typing import List
+from typing import List, Any
 
 import pymysql
 from pymysql.connections import Connection
 
 from models.analytics_data import AnalyticsData
+from models.feedback_exercise_data import ExerciseFeedbackData
 
 
 class UnitOfWork:
@@ -90,3 +91,64 @@ class UnitOfWork:
                 connection.commit()
                 connection.close()
         return result
+
+    def get_grammar_solution(self, lesson_id: int, exercise: int) -> List[Any]:
+        connection: Connection = None
+        result: List = []
+        try:
+            # database connection
+            connection: Connection = pymysql.connect(host=self._host, user=self._user, passwd=self._password, database=self._database)
+            cursor = connection.cursor()
+
+            sql = "SELECT esercizioID, TRIM(LOWER(Soluzione)) FROM ese_tipo1 where NParagrafo={0} and NEsercizio={1} order by NFrase".format(lesson_id, exercise)
+
+            # executing the query
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            for row in rows:
+                result.append((row[0], row[1]))
+
+        except Exception as ex:
+            print(ex)
+        finally:
+            # committing the connection then closing it.
+            if connection is not None:
+                connection.commit()
+                connection.close()
+        return result
+
+    def save_exercise_feedback(self, exercise_list: List[ExerciseFeedbackData]) -> bool:
+
+        connection: Connection = None
+        count: int = 0
+        try:
+            # database connection
+            connection: Connection = pymysql.connect(host=self._host, user=self._user, passwd=self._password, database=self._database)
+            cursor = connection.cursor()
+
+            for item in exercise_list:
+
+                answer = item.answer.replace("'", "`")
+
+                if len(item.correction) == 0:
+                    sql = "INSERT INTO `ese_exercise_feedback` (`exercise_type`,`exercise_id`,`question_number`, `answer_number`, `answer`,`percentage`)" \
+                          " VALUES ('{0}',{1},{2},{3},'{4}',{5});".format(item.exercise_type.name, item.exercise_id, item.question_number, item.answer_number, answer, item.percentage)
+                else:
+                    correction = item.correction.replace("'", "`")
+                    sql = "INSERT INTO `ese_exercise_feedback` (`exercise_type`,`exercise_id`,`question_number`,`answer_number`, `answer`,`percentage`,`correction`)" \
+                          " VALUES ('{0}',{1},{2},{3},'{4}',{5},'{6}');".format(item.exercise_type.name, item.exercise_id, item.question_number, item.answer_number, answer, item.percentage, correction)
+
+                # executing the query
+                count += cursor.execute(sql)
+
+        except Exception as ex:
+            print(ex)
+        finally:
+            # committing the connection then closing it.
+            if connection is not None:
+                connection.commit()
+                connection.close()
+
+        if count == len(exercise_list):
+            return True
+        return False

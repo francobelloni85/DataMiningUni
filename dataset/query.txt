@@ -30,3 +30,17 @@ CREATE TABLE `ese_exercise_feedback` (
   `url` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`exercise_type`,`exercise_id`,`answer_number`,`question_number`)
 ) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+
+
+
+Visualizzare
+SELECT * FROM ese_exercise_feedback order by exercise_id, question_number, answer_number;
