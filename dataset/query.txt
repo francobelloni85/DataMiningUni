@@ -57,3 +57,8 @@ CREATE TABLE `ese_exercise_feedback` (
 
 Visualizzare
 SELECT * FROM ese_exercise_feedback order by exercise_id, question_number, answer_number;
+
+
+# Raggruppare per url e media dei risultati
+SELECT url, avg(exercise_score)
+FROM ese_analytics_exercise where url = 'https://www.esercizinglese.com/audio/libri/esercizi/frankenstein/631'group by url having count(url) > 3;
