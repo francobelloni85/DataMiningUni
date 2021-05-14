@@ -1,0 +1,45 @@
+mean = (data_v1.groupby(['url', 'exercise_score'], as_index=False).mean().groupby('url')['exercise_score'].mean())
+print(mean)
+
+Il risultati ottenuti sia con con Mysql che con panda sono equivalenti.
+Per comodità si è scelto però di creare una nuova colonna direttamente qui nel dataset con python.
+<br> Si crea una nuova colonna chiamata difficult al posto di partire dal dataset raggruppato per mantenere tutte le inforazioni sugli utenti.
+<br>
+Si è volutamente non omettere quegli esercizi che hanno pochi voti anche se potrebbero portare a risultati poco consistenti
+
+
+
+inserire una nuova colonna: <br>
+- https://stackoverflow.com/questions/65422225/how-to-solve-keyerrorfnone-of-key-are-in-the-axis-name-in-this-case
+
+
+
+additional_cols = ['difficult']
+data_v2 = data.reindex(data.columns.tolist() + additional_cols, axis = 1)
+data_v2.columns
+
+
+Guida
+- https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+cercare record nel dataset <br>
+- https://kanoki.org/2020/01/21/pandas-dataframe-filter-with-multiple-conditions/
+<br><br>
+Settare un valore nel dataset<br>
+- https://stackoverflow.com/questions/13842088/set-value-for-particular-cell-in-pandas-dataframe-using-index
+<br><br>
+TODO Togliere il loop<br>
+- https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas/55557758#55557758
+
+
+def set_difficult(dataset, url: str, difficult: int):
+    mask = dataset[dataset['url'] == url]
+    for i in range(len(mask.index)):
+        dataset.loc[(int(mask.index[i])), 'difficult'] = difficult
+
+for url, val in mean.iteritems():
+    set_difficult(data_v2, url,val)
+
+
+data_v2.head()
+
