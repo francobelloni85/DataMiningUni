@@ -1,0 +1,98 @@
+return
+
+def get_score(my_dataset, user_id:int) -> int:
+    mask = my_dataset[my_dataset['userID'] == user_id]
+    if (len(mask.index) > 1):
+        raise Exception("2 times the userID!")
+    if (len(mask.index) > 0):
+        exercise_value = my_dataset.loc[mask.index[0],'exercise_score']
+        return exercise_value
+    else:
+        return 0
+
+def set_user_vector(my_dataset, user_id:int, my_audio_exercise_value, my_easy_exercise_value, my_grammar_exercise_value, my_translate_exercise_value  ) -> int:
+    mask = my_dataset[my_dataset['userID'] == user_id]
+    if (my_audio_exercise_value != 0):
+        my_dataset.loc[mask.index[0],'audio_exercise'] = my_audio_exercise_value
+    if (my_easy_exercise_value != 0):
+        my_dataset.loc[mask.index[0],'easy_exercise'] = my_easy_exercise_value
+    if (my_grammar_exercise_value != 0):
+        my_dataset.loc[mask.index[0],'grammar_exercise'] = my_grammar_exercise_value
+    if (my_translate_exercise_value != 0):
+        my_dataset.loc[mask.index[0],'translate_exercise'] = my_translate_exercise_value
+
+# list of values of 'Marks' column
+users = user_dataset['userID'].tolist()
+
+for current_user_id in users:
+    audio_exercise_value = get_score(user_dataset_audio_exercise_v1,current_user_id)
+    easy_exercise_value = get_score(user_dataset_easy_exercise_v1,current_user_id)
+    grammar_exercise_value = get_score(user_dataset_grammar_exercise_v1,current_user_id)
+    translate_exercise_value = get_score(user_dataset_translate_exercise_v1,current_user_id)
+    set_user_vector(user_dataset_v1,current_user_id,audio_exercise_value,easy_exercise_value,grammar_exercise_value,translate_exercise_value)
+
+user_dataset_v1.head()
+
+
+
+# user_dataset_v1.audio_exercise.update(user_dataset_audio_exercise_v1.all())
+# user_dataset_v1.easy_exercise.update(user_dataset_easy_exercise_v1.all())
+# user_dataset_v1.grammar_exercise.update(user_dataset_grammar_exercise_v1.all())
+# user_dataset_v1.translate_exercise.update(user_dataset_translate_exercise_v1.all())
+
+
+# user_dataset_audio_exercise_v1.rename(columns = {'exercise_score':'audio_exercise'}, inplace = True)
+# user_dataset_easy_exercise_v1.rename(columns = {'exercise_score':'easy_exercise'}, inplace = True)
+# user_dataset_grammar_exercise_v1.rename(columns = {'exercise_score':'grammar_exercise'}, inplace = True)
+# user_dataset_translate_exercise_v1.rename(columns = {'exercise_score':'translate_exercise'}, inplace = True)
+
+
+# user_dataset.set_index('userID')
+# user_dataset_audio_exercise_v1.set_index('userID')
+# user_dataset_easy_exercise_v1.set_index('userID')
+# user_dataset_grammar_exercise_v1.set_index('userID')
+# user_dataset_translate_exercise_v1.set_index('userID')
+
+
+TODO rimappare in maniera automatica le colonne<br><br>
+https://kanoki.org/2019/04/06/pandas-map-dictionary-values-with-dataframe-columns/
+<br><br>
+Rinominare colonne: <br>
+- https://www.geeksforgeeks.org/how-to-rename-columns-in-pandas-dataframe/
+
+
+
+users = user_dataset['userID'].tolist()
+
+def get_score(my_dataset, user_id:int) -> int:
+    mask = my_dataset[my_dataset['userID'] == user_id and my_dataset['userID'] == user_id]
+
+    if (len(mask.index) > 0):
+        exercise_value = my_dataset.loc[mask.index[0],'exercise_score']
+        return exercise_value
+    else:
+        return 0
+
+for current_user_id in users:
+    audio_exercise_value = get_score(user_dataset_audio_exercise_v1,current_user_id)
+    easy_exercise_value = get_score(user_dataset_easy_exercise_v1,current_user_id)
+    grammar_exercise_value = get_score(user_dataset_grammar_exercise_v1,current_user_id)
+    translate_exercise_value = get_score(user_dataset_translate_exercise_v1,current_user_id)
+    set_user_vector(user_dataset_v1,current_user_id,audio_exercise_value,easy_exercise_value,grammar_exercise_value,translate_exercise_value)
+users = user_dataset['userID'].tolist()
+
+def get_score(my_dataset, user_id:int) -> int:
+    mask = my_dataset[my_dataset['userID'] == user_id and my_dataset['userID'] == user_id]
+
+    if (len(mask.index) > 0):
+        exercise_value = my_dataset.loc[mask.index[0],'exercise_score']
+        return exercise_value
+    else:
+        return 0
+
+for current_user_id in users:
+    audio_exercise_value = get_score(user_dataset_audio_exercise_v1,current_user_id)
+    easy_exercise_value = get_score(user_dataset_easy_exercise_v1,current_user_id)
+    grammar_exercise_value = get_score(user_dataset_grammar_exercise_v1,current_user_id)
+    translate_exercise_value = get_score(user_dataset_translate_exercise_v1,current_user_id)
+    set_user_vector(user_dataset_v1,current_user_id,audio_exercise_value,easy_exercise_value,grammar_exercise_value,translate_exercise_value)
