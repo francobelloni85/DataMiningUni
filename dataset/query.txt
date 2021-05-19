@@ -48,8 +48,17 @@ CREATE TABLE `ese_exercise_feedback` (
 
 
 
+### BOT SET UP
 
+# 1 - aggiungo la colonna 'bot'
+ALTER TABLE `ese_analytics`
+ADD COLUMN `bot` INT NULL DEFAULT 0 AFTER `exercise_score`;
 
+# 2 - Da ese_analytics a ese_analytics_exercise_full
+create ese_analytics_bot SELECT * FROM ese_analytics where bot = 0
+
+UPDATE `ese_analytics` SET `bot` = '1'
+WHERE ip in (SELECT distinct ip FROM ese_analytics_exercise_full group by ip having count(*) > 3000);
 
 
 
@@ -62,3 +71,5 @@ SELECT * FROM ese_exercise_feedback order by exercise_id, question_number, answe
 # Raggruppare per url e media dei risultati
 SELECT url, avg(exercise_score)
 FROM ese_analytics_exercise where url = 'https://www.esercizinglese.com/audio/libri/esercizi/frankenstein/631'group by url having count(url) > 3;
+
+
