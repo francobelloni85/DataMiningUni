@@ -96,3 +96,109 @@ for current_user_id in users:
     grammar_exercise_value = get_score(user_dataset_grammar_exercise_v1,current_user_id)
     translate_exercise_value = get_score(user_dataset_translate_exercise_v1,current_user_id)
     set_user_vector(user_dataset_v1,current_user_id,audio_exercise_value,easy_exercise_value,grammar_exercise_value,translate_exercise_value)
+
+# OLD CODE
+#start = time.time()
+#verbose: bool = False
+# count = 1
+#
+# for ip in list_ip:
+#
+#     sql ="SELECT count, date, count_page FROM ese_analytics_bot_v1 where ip = '{0}' order by date".format(ip);
+#     if verbose:
+#         print(sql)
+#
+#     data_result = query_db(sql)
+#     if verbose:
+#         print(data_result)
+#
+#     n_row = len(data_result)
+#     count_row = 1
+#     for i in range(0, n_row):
+#         row_id =  data_result.iloc[i]['count']
+#         count_page =  data_result.iloc[i]['count_page']
+#
+#         is_last_page = 0
+#         time_elapse = 1
+#         count_page_match = 0
+#
+#         start_page = data_result.iloc[i]['date']
+#         if (i+1) < n_row:
+#             end_page = data_result.iloc[i+1]['date']
+#             time_elapse = (end_page - start_page).total_seconds()
+#         else:
+#             is_last_page = 1
+#
+#         if count_page_match == count_row:
+#             count_page_match = 1
+#
+#         if verbose:
+#             print("{0} - {1} - {2} - {3}".format(row_id,time_elapse,is_last_page,count_page_match))
+#
+#         # Merge all the UPDATE query To do
+#         sql = "UPDATE `ese_analytics_bot_v1` SET `time_in_page` = {0}, `last_page` = {1}, count_page_match = {2} WHERE count = {3};".format(time_elapse,is_last_page,count_page_match,row_id)
+#         row_update = update_db(sql)
+#         if verbose:
+#             print(row_update, "record(s) affected")
+#
+#         count_row = count_row + 1
+#
+#     count = count + 1
+#     if count % 100 == 0:
+#         print("\nNow working with:{0}".format(ip))
+#         print("\n{0}/{1}".format(count,len(list_ip)))
+#
+# end = time.time()
+# print(f"Time elapse:{end - start:0.4f} s")# OLD CODE
+#start = time.time()
+#verbose: bool = False
+# count = 1
+#
+# for ip in list_ip:
+#
+#     sql ="SELECT count, date, count_page FROM ese_analytics_bot_v1 where ip = '{0}' order by date".format(ip);
+#     if verbose:
+#         print(sql)
+#
+#     data_result = query_db(sql)
+#     if verbose:
+#         print(data_result)
+#
+#     n_row = len(data_result)
+#     count_row = 1
+#     for i in range(0, n_row):
+#         row_id =  data_result.iloc[i]['count']
+#         count_page =  data_result.iloc[i]['count_page']
+#
+#         is_last_page = 0
+#         time_elapse = 1
+#         count_page_match = 0
+#
+#         start_page = data_result.iloc[i]['date']
+#         if (i+1) < n_row:
+#             end_page = data_result.iloc[i+1]['date']
+#             time_elapse = (end_page - start_page).total_seconds()
+#         else:
+#             is_last_page = 1
+#
+#         if count_page_match == count_row:
+#             count_page_match = 1
+#
+#         if verbose:
+#             print("{0} - {1} - {2} - {3}".format(row_id,time_elapse,is_last_page,count_page_match))
+#
+#         # Merge all the UPDATE query To do
+#         sql = "UPDATE `ese_analytics_bot_v1` SET `time_in_page` = {0}, `last_page` = {1}, count_page_match = {2} WHERE count = {3};".format(time_elapse,is_last_page,count_page_match,row_id)
+#         row_update = update_db(sql)
+#         if verbose:
+#             print(row_update, "record(s) affected")
+#
+#         count_row = count_row + 1
+#
+#     count = count + 1
+#     if count % 100 == 0:
+#         print("\nNow working with:{0}".format(ip))
+#         print("\n{0}/{1}".format(count,len(list_ip)))
+#
+# end = time.time()
+# print(f"Time elapse:{end - start:0.4f} s")
